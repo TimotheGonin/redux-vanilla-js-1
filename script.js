@@ -27,3 +27,18 @@ const reducer = (state = initialState, action) => {
 			return state;
 	}
 };
+
+//STORE
+const store = Redux.createStore(reducer);
+
+const availablePhones = document.getElementById("count");
+availablePhones.innerHTML = store.getState().phones;
+
+document.getElementById("buy-phone").addEventListener("click", function () {
+	store.dispatch(buyPhone());
+});
+
+store.subscribe(() => {
+	console.log("Mon nouveau Store", store.getState());
+	availablePhones.innerHTML = store.getState().phones;
+});
